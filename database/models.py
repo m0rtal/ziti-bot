@@ -23,11 +23,6 @@ class GazzettaArticle(Base):
     # crawled = relationship("CrawledUrls", backref="GazzettaArticle")
 
 
-class CrawledUrls(Base):
-    __tablename__ = "CrawledUrls"
-    id = Column(Integer, primary_key=True, autoincrement=True, nullable=False)
-    crawled_url = Column(String(2048), nullable=False, unique=True)
-
 
 class Sentences(Base):
     __tablename__ = "Sentences"

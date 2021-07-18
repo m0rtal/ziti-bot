@@ -5,7 +5,7 @@ from . import models
 
 class Database:
     def __init__(self, db_url):
-        engine = create_engine(db_url)
+        engine = create_engine(db_url, pool_pre_ping=True)
         models.Base.metadata.create_all(bind=engine)
         self.maker = sessionmaker(bind=engine)
 
@@ -35,10 +35,3 @@ class Database:
             return None
         return instance
 
-    def get_crawled(self):
-        session = self.maker()
-        model = models.CrawledUrls
-        instance = session.query(model).all()
-        if not instance:
-            return None
-        return instance
