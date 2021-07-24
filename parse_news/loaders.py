@@ -4,7 +4,9 @@ from scrapy.loader import ItemLoader
 
 def clear_text(text: str) -> str:
     try:
-        text = text.replace("&quot;", "'").replace("&rsquo;", "'")
+        text = text.replace("&quot;", "'").replace("&rsquo;", "'").replace("&ldquo;", '"').replace("&rdquo;",
+                                                                                                   '"').replace(
+            "&ndash;", "-").replace("<B>", "").replace("<b>", "").replace("<44; B>", "")
     except ValueError as err:
         print(err)
     return text

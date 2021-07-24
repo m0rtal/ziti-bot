@@ -1,1 +1,1 @@
-# Open it-ru translation project 
+# Open it-ru soccer news translation project 

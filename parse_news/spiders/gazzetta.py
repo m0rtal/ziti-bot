@@ -7,8 +7,8 @@ from database import models
 from database.database import Database
 from parse_news.loaders import GazzettaLoader
 
-orm_database = Database("postgresql://postgres:@192.168.1.11/test")
-# orm_database = Database("sqlite:///database.sqlite")
+# orm_database = Database("postgresql://postgres:@192.168.1.11/test")
+orm_database = Database("sqlite:///database.sqlite")
 
 
 class GazzettaSpider(scrapy.Spider):
@@ -30,6 +30,7 @@ class GazzettaSpider(scrapy.Spider):
 
         valid_json = " ".join(response.text.split()).replace(", , ", ", ")
         json_load = json.loads(valid_json)
+        img_url, img_alt = None, None
 
         if json_load.get("featureImage").get("content") and json_load.get("featureImage").get("caption"):
             img_url = json_load.get("featureImage").get("content")
@@ -54,4 +55,4 @@ class GazzettaSpider(scrapy.Spider):
         article = loader.load_item()
 
         if article["content"]:
-            orm_database.add_record(article, models.GazzettaArticle, "foreign_id")
+            orm_database.add_unique_record(article, models.GazzettaArticle, "foreign_id")
