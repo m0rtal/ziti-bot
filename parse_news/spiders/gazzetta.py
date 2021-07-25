@@ -20,7 +20,7 @@ class GazzettaSpider(scrapy.Spider):
         articles = response.json()["response"]["docs"]
         for article in articles:
             section = " ".join(article["section"]).lower()
-            if "calcio" in section and article["type"] != "video":
+            if "Calcio/Serie A/Milan".lower() in section and article["type"] != "video":
                 follow_url = article.get("json", None)
                 if follow_url: # and follow_url not in parsed_urls:
                     yield response.follow(article["json"], callback=self.parse_article)
