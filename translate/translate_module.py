@@ -33,3 +33,4 @@ def drop_to_excel(db):
         filename = os.path.join("for_translation", f"{el}.xlsx")
         os.makedirs(os.path.dirname(filename), exist_ok=True)
         df.to_excel(filename)
+
