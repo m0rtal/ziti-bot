@@ -15,3 +15,5 @@ if __name__ == "__main__":
     orm_database = Database("sqlite:///database.sqlite")
     add_auto_translation(orm_database)
     drop_to_excel(orm_database)
+    orm_database.import_translated()
+
